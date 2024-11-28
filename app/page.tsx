@@ -4,7 +4,9 @@ import { useState } from "react"
 import { ScanLines } from "@/components/scan-lines"
 import { AsciiIcon } from "@/components/ascii-icon"
 import { TechStack } from "@/components/tech-stack"
-import { Terminal, Github, Linkedin, Mail, AppWindow, SquareTerminal, Server, Braces, DatabaseZap, Layout, Gamepad2, Popcorn, Database, Tv, BookOpen, Code, PenTool, Heart, FileUser, MonitorSmartphoneIcon, Container, Workflow, GitMerge } from 'lucide-react'
+import { Terminal, Github, Linkedin, Mail, Gamepad2, Popcorn, Tv, BookOpen, Code,FileUser } from 'lucide-react'
+import { SiVisualstudio, SiPlesk, SiMysql, SiLinux, SiVisualstudiocode, SiAndroidstudio, SiJenkins, SiPostman, SiMicrosoftsqlserver, SiDocker, SiGithub, SiWindows } from "react-icons/si";
+
 import { useTypingEffect } from "@/hooks/useTypingEffect"
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -161,51 +163,51 @@ export default function RetroPortfolio() {
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <Terminal className="w-8 h-8 text-green-500 mb-2" />
+            <SiVisualstudio className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Visual Studio</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <Layout className="w-8 h-8 text-green-500 mb-2" />
+            <SiVisualstudiocode className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Visual Studio Code</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <MonitorSmartphoneIcon className="w-8 h-8 text-green-500 mb-2" />
+            <SiAndroidstudio className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Android Studio</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <Container className="w-8 h-8 text-green-500 mb-2" />
+            <SiDocker className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Docker</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <Workflow className="w-8 h-8 text-green-500 mb-2" />
+            <SiJenkins className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Jenkins</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <GitMerge className="w-8 h-8 text-green-500 mb-2" />
+            <SiGithub className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Github</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <AppWindow className="w-8 h-8 text-green-500 mb-2" />
+            <SiWindows className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Windows</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <SquareTerminal className="w-8 h-8 text-green-500 mb-2" />
+            <SiLinux className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Linux</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <Server className="w-8 h-8 text-green-500 mb-2" />
+            <SiPlesk className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">VPS | Plesk</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <Braces className="w-8 h-8 text-green-500 mb-2" />
+            <SiPostman className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">Postman</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <DatabaseZap className="w-8 h-8 text-green-500 mb-2" />
+            <SiMysql className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">MySQL</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
-            <Database className="w-8 h-8 text-green-500 mb-2" />
+            <SiMicrosoftsqlserver className="w-8 h-8 text-green-500 mb-2" />
             <span className="text-green-500 font-mono text-sm">SQL Server</span>
           </div>
         </div>
