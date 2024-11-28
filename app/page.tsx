@@ -1,101 +1,327 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import { useState } from "react"
+import { ScanLines } from "@/components/scan-lines"
+import { AsciiIcon } from "@/components/ascii-icon"
+import { TechStack } from "@/components/tech-stack"
+import { Terminal, Github, Linkedin, Mail, AppWindow, SquareTerminal, Server, Braces, DatabaseZap, Layout, Gamepad2, Popcorn, Database, Tv, BookOpen, Code, PenTool, Heart, FileUser, MonitorSmartphoneIcon, Container, Workflow, GitMerge } from 'lucide-react'
+import { useTypingEffect } from "@/hooks/useTypingEffect"
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { ExternalLink } from 'lucide-react'
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+export default function RetroPortfolio() {
+  const [activeSection, setActiveSection] = useState("about")
+
+  const subtitles = [
+    "Backend Developer",
+    "System Architect",
+    "API Designer",
+    "Database Expert",
+    "Cloud Engineer",
+    "Anime Enthusiast"
+  ]
+
+  const animePhrases = [
+    // One Piece
+    "The world is not as good as it should be, but there are still people who do everything they can to make it better. ~ Monkey D. Luffy",
+    "I am not a hero because I want to be, I am a hero because I am the only one who can do it. ~ Monkey D. Luffy",
+    "Life is like the sea, and hope is the wind. ~ Trafalgar D. Water Law",
+  
+    // Fullmetal Alchemist
+    "A man cannot change his destiny, but he can change his destiny for another. ~ Edward Elric",
+    "A lie is a lie, even if you say it with good intentions. ~ Roy Mustang",
+    "He who does not sacrifice for others cannot expect others to sacrifice for him. ~ Izumi Curtis",
+  
+    // Sword Art Online
+    "In this world, there is no such thing as 'I can't.' There is only 'I haven't done it yet.' ~ Asuna",
+    "People don't die when they stop breathing, they die when they stop believing. ~ Suguha Kirigaya",
+  
+    // Your Name
+    "Even though time and distance may separate us, I will always be with you. ~ Taki Tachibana",
+    "Time doesn't heal everything. But it’s all we have. ~ Mitsuha Miyamizu",
+  ];
+  
+  const typedText = useTypingEffect(subtitles, 100, 50, 1500)
+  const typedAnimeText = useTypingEffect(animePhrases, 75, 50, 1500)
+
+  const content = {
+    about: (
+      <div className="space-y-4">
+        <p className="text-green-500 font-mono">
+        Hello! I am a dedicated software developer with expertise in backend development using technologies like 
+        C#, .NET, and Python, alongside experience in frontend frameworks such as Angular. I specialize in web scraping techniques and implement Swagger, 
+        Identity, and SOLID principles in my projects. My skills extend to building efficient .NET libraries, developing Windows Forms apps, 
+        and integrating features like Discord Rich Presence. My passion lies in creating scalable, efficient solutions while continuously enhancing 
+        my technical expertise.
+        </p>
+        <TechStack />
+        <div className="border border-green-500/20 p-4 mt-4">
+          <h3 className="text-green-500 font-mono mb-2">Anime Time!</h3>
+          <p className="text-green-500 font-mono text-sm">
+              {typedAnimeText}<span className="animate-blink">_</span>
+          </p>
+        </div>
+      </div>
+    ),
+    projects: (
+      <div className="space-y-4">
+        
+        <div className="border border-green-500/20 p-4">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
             <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/projects/Kuhaku.webp"
+              alt="KuhakuAPI"
+              width={100}
+              height={100}
+              className="rounded-md w-full sm:w-24 h-auto object-cover"
             />
-            Deploy now
+            <div className="flex-1">
+              <h3 className="text-green-500 font-mono mb-2">KuhakuAPI</h3>
+              <p className="text-green-500 font-mono text-sm mb-2">
+                - WebScraping
+                - API
+                - Swagger
+                - Identity
+                - C#
+                - Onion Arch
+                - Movies
+                - Database
+              </p>
+              <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
+                <a href="https://github.com/AbreuHD/KuhakuAPI" className="flex items-center">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  View Project
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="border border-green-500/20 p-4">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
+            <Image
+              src="/projects/NotYet.webp"
+              alt="Bidehan"
+              width={100}
+              height={100}
+              className="rounded-md w-full sm:w-24 h-auto object-cover"
+            />
+            <div className="flex-1">
+              <h3 className="text-green-500 font-mono mb-2">Bidehan</h3>
+              <p className="text-green-500 font-mono text-sm mb-2">
+                - WebScraping
+                - NuGet
+                - C#
+                - Video Source
+              </p>
+              <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
+                <a href="https://github.com/AbreuHD/Bidehan" className="flex items-center">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  View Project
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="border border-green-500/20 p-4">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
+            <Image
+              src="/projects/NotYet.webp"
+              alt="Bideo Rinku"
+              width={100}
+              height={100}
+              className="rounded-md w-full sm:w-24 h-auto object-cover"
+            />
+            <div className="flex-1">
+              <h3 className="text-green-500 font-mono mb-2">Bideo Rinku</h3>
+              <p className="text-green-500 font-mono text-sm mb-2">
+                - C#
+                - Windows Form
+                - WebScraping
+                - VLC Media Player
+                - Discord Rich Presence
+                </p>
+              <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
+                <a href="https://github.com/AbreuHD/Bideo-Rinku" className="flex items-center">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  View Project
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    workstation: (
+      <div className="space-y-4">
+        <p className="text-green-500 font-mono mb-4">
+          My development environment is carefully crafted for maximum productivity:
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Terminal className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Visual Studio</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Layout className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Visual Studio Code</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <MonitorSmartphoneIcon className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Android Studio</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Container className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Docker</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Workflow className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Jenkins</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <GitMerge className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Github</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <AppWindow className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Windows</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <SquareTerminal className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Linux</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Server className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">VPS | Plesk</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Braces className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Postman</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <DatabaseZap className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">MySQL</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Database className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">SQL Server</span>
+          </div>
+        </div>
+        <div className="border border-green-500/20 p-4 mt-4">
+          <p className="text-green-500 font-mono text-sm">
+            Every day learning more to keep adding!
+          </p>
+        </div>
+      </div>
+    ),
+    hobbies: (
+      <div className="space-y-4">
+        <p className="text-green-500 font-mono mb-4">
+          When not coding, I enjoy:
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Github className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Open Source</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <BookOpen className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Learning</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Code className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Side Projects</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Tv className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Watch Anime</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Gamepad2 className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Video Games</span>
+          </div>
+          <div className="border border-green-500/20 p-4 flex flex-col items-center">
+            <Popcorn className="w-8 h-8 text-green-500 mb-2" />
+            <span className="text-green-500 font-mono text-sm">Movies and series</span>
+          </div>
+        </div>
+      </div>
+    ),
+  }
+
+  return (
+    <div className="min-h-screen bg-black">
+      <ScanLines />
+      <div className="max-w-4xl mx-auto p-4">
+        <header className="border border-green-500/20 p-4 mb-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <Terminal className="w-12 h-12 text-green-500" />
+            <div className="text-center sm:text-left">
+              <h1 className="text-green-500 font-mono text-xl">Jefferson@AbreuHD:~$</h1>
+              <p className="text-green-500 font-mono text-sm h-6">
+                {typedText}<span className="animate-blink">_</span>
+              </p>
+            </div>
+          </div>
+        </header>
+        <div className="border border-green-500/20 p-4 mb-4 flex justify-center space-x-6">
+          <a href="https://github.com/abreuhd" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
+            <Github className="w-6 h-6" />
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+          <a href="https://linkedin.com/in/abreuhd" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
+            <Linkedin className="w-6 h-6" />
+          </a>
+          <a href="mailto:abreumartinezjefferson@gmail.com" className="text-green-500 hover:text-green-400">
+            <Mail className="w-6 h-6" />
+          </a>
+          <a href="https://linkedin.com/in/abreuhd" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
+            <FileUser className="w-6 h-6" />
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-green-500/20">
+          <AsciiIcon
+            icon="about"
+            label="ABOUT"
+            isActive={activeSection === "about"}
+            onClick={() => setActiveSection("about")}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <AsciiIcon
+            icon="projects"
+            label="PROJECTS"
+            isActive={activeSection === "projects"}
+            onClick={() => setActiveSection("projects")}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <AsciiIcon
+            icon="workstation"
+            label="WORKSTATION"
+            isActive={activeSection === "workstation"}
+            onClick={() => setActiveSection("workstation")}
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <AsciiIcon
+            icon="hobbies"
+            label="HOBBIES"
+            isActive={activeSection === "hobbies"}
+            onClick={() => setActiveSection("hobbies")}
+          />
+        </div>
+        
+        <div className="border border-green-500/20 p-4 mt-4">
+          {content[activeSection as keyof typeof content]}
+        </div>
+        <style jsx>{`
+          @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+          }
+          .animate-blink {
+            animation: blink 1s infinite;
+          }
+        `}</style>
+      </div>
     </div>
-  );
+  )
 }
+
