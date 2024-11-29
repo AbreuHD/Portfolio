@@ -4,7 +4,7 @@ import { useState } from "react"
 import { ScanLines } from "@/components/scan-lines"
 import { AsciiIcon } from "@/components/ascii-icon"
 import { TechStack } from "@/components/tech-stack"
-import { Terminal, Github, Linkedin, Mail, Gamepad2, Popcorn, Tv, BookOpen, Code,FileUser } from 'lucide-react'
+import { Terminal, Github, Linkedin, Mail, Gamepad2, Popcorn, Tv, BookOpen, Code } from 'lucide-react'
 import { SiVisualstudio, SiPlesk, SiMysql, SiLinux, SiVisualstudiocode, SiAndroidstudio, SiJenkins, SiPostman, SiMicrosoftsqlserver, SiDocker, SiGithub, SiWindows } from "react-icons/si";
 
 import { useTypingEffect } from "@/hooks/useTypingEffect"
