@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Deploy to FTP') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'abreu_portfolio_ftp_args', usernameVariable: 'FTP_USER', passwordVariable: 'FTP_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'abreu_portfolio_ftp_arg', usernameVariable: 'FTP_USER', passwordVariable: 'FTP_PASSWORD')]) {
                     sh '''
                         if [ -d out ]; then
                             lftp -e "
