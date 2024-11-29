@@ -282,11 +282,8 @@ export default function RetroPortfolio() {
           <a href="mailto:abreumartinezjefferson@gmail.com" className="text-green-500 hover:text-green-400">
             <Mail className="w-6 h-6" />
           </a>
-          <button onClick={() => setActiveSection("cv")} rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
-            <FileUser className="w-6 h-6" />
-          </button>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-green-500/20">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-green-500/20">
           <AsciiIcon
             icon="about"
             label="ABOUT"
@@ -310,6 +307,12 @@ export default function RetroPortfolio() {
             label="HOBBIES"
             isActive={activeSection === "hobbies"}
             onClick={() => setActiveSection("hobbies")}
+          />
+          <AsciiIcon
+            icon="resume"
+            label="RESUME"
+            isActive={activeSection === "cv"}
+            onClick={() => setActiveSection("cv")}
           />
         </div>
         
