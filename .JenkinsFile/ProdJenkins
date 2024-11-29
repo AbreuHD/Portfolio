@@ -1,0 +1,45 @@
+pipeline {
+    agent { label 'United_States' }
+    environment {
+        FTP_SERVER = credentials('abreu_fpt_host')
+    }
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('Deploy to FTP') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'abreu_portfolio_ftp_args', usernameVariable: 'FTP_USER', passwordVariable: 'FTP_PASSWORD')]) {
+                    sh '''
+                        if [ -d out ]; then
+                            lftp -e "
+                                set ssl:verify-certificate no;
+                                open ftp://$FTP_USER:$FTP_PASSWORD@$FTP_SERVER;
+                                mirror -R out .;
+                                bye;
+                            "
+                        else
+                            echo "Directorio out no encontrado. No hay archivos para subir."
+                            exit 1
+                        fi
+                    '''
+                }
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline ejecutado exitosamente y archivos subidos por FTP.'
+        }
+        failure {
+            echo 'Hubo un problema durante la ejecución del pipeline.'
+        }
+    }
+}

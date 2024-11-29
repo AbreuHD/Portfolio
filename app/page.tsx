@@ -11,7 +11,7 @@ import { useTypingEffect } from "@/hooks/useTypingEffect"
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from 'lucide-react'
-
+import PdfViewer from "@/components/PdfViewer"
 export default function RetroPortfolio() {
   const [activeSection, setActiveSection] = useState("about")
 
@@ -251,6 +251,10 @@ export default function RetroPortfolio() {
         </div>
       </div>
     ),
+    cv: (
+      
+      <PdfViewer fileUrl="/Jefferson - Resume.pdf" />
+    ),
   }
 
   return (
@@ -278,9 +282,9 @@ export default function RetroPortfolio() {
           <a href="mailto:abreumartinezjefferson@gmail.com" className="text-green-500 hover:text-green-400">
             <Mail className="w-6 h-6" />
           </a>
-          <a href="https://linkedin.com/in/abreuhd" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
+          <button onClick={() => setActiveSection("cv")} rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
             <FileUser className="w-6 h-6" />
-          </a>
+          </button>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-green-500/20">
           <AsciiIcon
