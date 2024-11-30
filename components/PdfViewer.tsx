@@ -7,23 +7,24 @@ import { useResizeObserver } from '@wojtekmaj/react-hooks';
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface PdfViewerProps {
-    fileUrl: string; // Propiedad para pasar la URL del archivo PDF
+    fileUrl: string;
+    downloadUri: string;
 }
 
-const PdfViewer: React.FC<PdfViewerProps> = ({ fileUrl }) => {
+const PdfViewer: React.FC<PdfViewerProps> = ({ fileUrl, downloadUri }) => {
     const [containerWidth, setContainerWidth] = useState<number>();
     const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
-    
+
     const maxWidth = 825;
     const resizeObserverOptions = {};
 
     const onResize = useCallback<ResizeObserverCallback>((entries) => {
         const [entry] = entries;
-    
+
         if (entry) {
-          setContainerWidth(entry.contentRect.width);
+            setContainerWidth(entry.contentRect.width);
         }
-      }, []);
+    }, []);
 
     useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
@@ -36,7 +37,7 @@ const PdfViewer: React.FC<PdfViewerProps> = ({ fileUrl }) => {
                     size="sm"
                     className="text-green-500 border-green-500 hover:bg-green-500/20"
                 >
-                    <a href={fileUrl} className="flex items-center" download>
+                    <a href={downloadUri} className="flex items-center" download>
                         <Download className="w-4 h-4 mr-2" />
                         Download
                     </a>
@@ -44,11 +45,18 @@ const PdfViewer: React.FC<PdfViewerProps> = ({ fileUrl }) => {
             </div>
 
             <Document file={fileUrl} >
+
                 <Page
                     pageNumber={1}
                     renderMode="canvas"
                     width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
                 />
+                <Page
+                    pageNumber={2}
+                    renderMode="canvas"
+                    width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
+                />
+
             </Document>
         </div>
     );

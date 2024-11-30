@@ -154,6 +154,34 @@ export default function RetroPortfolio() {
             </div>
           </div>
         </div>
+
+        <div className="border border-green-500/20 p-4">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
+            <Image
+              src="/projects/NotYet.webp"
+              alt="Auth"
+              width={100}
+              height={100}
+              className="rounded-md w-full sm:w-24 h-auto object-cover"
+            />
+            <div className="flex-1">
+              <h3 className="text-green-500 font-mono mb-2">Auth NuGet</h3>
+              <p className="text-green-500 font-mono text-sm mb-2">
+                - C#
+                - Identity
+                - Database
+                - Code First
+                - Package
+                </p>
+              <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
+                <a href="https://github.com/AbreuHD/Auth" className="flex items-center">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  View Project
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     ),
     workstation: (
@@ -253,7 +281,7 @@ export default function RetroPortfolio() {
     ),
     cv: (
       
-      <PdfViewer fileUrl="/Jefferson - Resume.pdf" />
+      <PdfViewer fileUrl="/Jefferson Eng Resume Cut.pdf" downloadUri="/Jefferson Abreu Martinez_ENG_Resume.pdf" />
     ),
   }
 
