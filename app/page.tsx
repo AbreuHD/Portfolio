@@ -307,7 +307,7 @@ export default function RetroPortfolio() {
           <a href="https://linkedin.com/in/abreuhd" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href="mailto:abreumartinezjefferson@gmail.com" className="text-green-500 hover:text-green-400">
+          <a href="mailto:jefferson@abreuhd.com" className="text-green-500 hover:text-green-400">
             <Mail className="w-6 h-6" />
           </a>
         </div>
