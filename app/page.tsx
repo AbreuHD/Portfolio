@@ -29,21 +29,21 @@ export default function RetroPortfolio() {
     "The world is not as good as it should be, but there are still people who do everything they can to make it better. ~ Monkey D. Luffy",
     "I am not a hero because I want to be, I am a hero because I am the only one who can do it. ~ Monkey D. Luffy",
     "Life is like the sea, and hope is the wind. ~ Trafalgar D. Water Law",
-  
+
     // Fullmetal Alchemist
     "A man cannot change his destiny, but he can change his destiny for another. ~ Edward Elric",
     "A lie is a lie, even if you say it with good intentions. ~ Roy Mustang",
     "He who does not sacrifice for others cannot expect others to sacrifice for him. ~ Izumi Curtis",
-  
+
     // Sword Art Online
     "In this world, there is no such thing as 'I can't.' There is only 'I haven't done it yet.' ~ Asuna",
     "People don't die when they stop breathing, they die when they stop believing. ~ Suguha Kirigaya",
-  
+
     // Your Name
     "Even though time and distance may separate us, I will always be with you. ~ Taki Tachibana",
     "Time doesn't heal everything. But it’s all we have. ~ Mitsuha Miyamizu",
   ];
-  
+
   const typedText = useTypingEffect(subtitles, 100, 50, 1500)
   const typedAnimeText = useTypingEffect(animePhrases, 75, 50, 1500)
 
@@ -51,24 +51,24 @@ export default function RetroPortfolio() {
     about: (
       <div className="space-y-4">
         <p className="text-green-500 font-mono">
-        Hello! I am a dedicated software developer with expertise in backend development using technologies like 
-        C#, .NET, and Python, alongside experience in frontend frameworks such as Angular. I specialize in web scraping techniques and implement Swagger, 
-        Identity, and SOLID principles in my projects. My skills extend to building efficient .NET libraries, developing Windows Forms apps, 
-        and integrating features like Discord Rich Presence. My passion lies in creating scalable, efficient solutions while continuously enhancing 
-        my technical expertise.
+          Hello! I am a dedicated software developer with expertise in backend development using technologies like
+          C#, .NET, and Python, alongside experience in frontend frameworks such as Angular. I specialize in web scraping techniques and implement Swagger,
+          Identity, and SOLID principles in my projects. My skills extend to building efficient .NET libraries, developing Windows Forms apps,
+          and integrating features like Discord Rich Presence. My passion lies in creating scalable, efficient solutions while continuously enhancing
+          my technical expertise.
         </p>
         <TechStack />
         <div className="border border-green-500/20 p-4 mt-4">
           <h3 className="text-green-500 font-mono mb-2">Anime Time!</h3>
           <p className="text-green-500 font-mono text-sm">
-              {typedAnimeText}<span className="animate-blink">_</span>
+            {typedAnimeText}<span className="animate-blink">_</span>
           </p>
         </div>
       </div>
     ),
     projects: (
       <div className="space-y-4">
-        
+
         <div className="border border-green-500/20 p-4">
           <div className="flex flex-col sm:flex-row items-start gap-4">
             <Image
@@ -99,62 +99,64 @@ export default function RetroPortfolio() {
             </div>
           </div>
         </div>
-
-        <div className="border border-green-500/20 p-4">
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <Image
-              src="/projects/NotYet.webp"
-              alt="Bidehan"
-              width={100}
-              height={100}
-              className="rounded-md w-full sm:w-24 h-auto object-cover"
-            />
-            <div className="flex-1">
-              <h3 className="text-green-500 font-mono mb-2">Bidehan</h3>
-              <p className="text-green-500 font-mono text-sm mb-2">
-                - WebScraping
-                - NuGet
-                - C#
-                - Video Source
-              </p>
-              <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
-                <a href="https://github.com/AbreuHD/Bidehan" className="flex items-center">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  View Project
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div className="border border-green-500/20 p-4">
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <Image
-              src="/projects/NotYet.webp"
-              alt="Bideo Rinku"
-              width={100}
-              height={100}
-              className="rounded-md w-full sm:w-24 h-auto object-cover"
-            />
-            <div className="flex-1">
-              <h3 className="text-green-500 font-mono mb-2">Bideo Rinku</h3>
-              <p className="text-green-500 font-mono text-sm mb-2">
-                - C#
-                - Windows Form
-                - WebScraping
-                - VLC Media Player
-                - Discord Rich Presence
-                </p>
-              <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
-                <a href="https://github.com/AbreuHD/Bideo-Rinku" className="flex items-center">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  View Project
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-
+        {
+          /*
+                <div className="border border-green-500/20 p-4">
+                  <div className="flex flex-col sm:flex-row items-start gap-4">
+                    <Image
+                      src="/projects/NotYet.webp"
+                      alt="Bidehan"
+                      width={100}
+                      height={100}
+                      className="rounded-md w-full sm:w-24 h-auto object-cover"
+                    />
+                    <div className="flex-1">
+                      <h3 className="text-green-500 font-mono mb-2">Bidehan</h3>
+                      <p className="text-green-500 font-mono text-sm mb-2">
+                        - WebScraping
+                        - NuGet
+                        - C#
+                        - Video Source
+                      </p>
+                      <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
+                        <a href="https://github.com/AbreuHD/Bidehan" className="flex items-center">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          View Project
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+        
+                <div className="border border-green-500/20 p-4">
+                  <div className="flex flex-col sm:flex-row items-start gap-4">
+                    <Image
+                      src="/projects/NotYet.webp"
+                      alt="Bideo Rinku"
+                      width={100}
+                      height={100}
+                      className="rounded-md w-full sm:w-24 h-auto object-cover"
+                    />
+                    <div className="flex-1">
+                      <h3 className="text-green-500 font-mono mb-2">Bideo Rinku</h3>
+                      <p className="text-green-500 font-mono text-sm mb-2">
+                        - C#
+                        - Windows Form
+                        - WebScraping
+                        - VLC Media Player
+                        - Discord Rich Presence
+                        </p>
+                      <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
+                        <a href="https://github.com/AbreuHD/Bideo-Rinku" className="flex items-center">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          View Project
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                */
+        }
         <div className="border border-green-500/20 p-4">
           <div className="flex flex-col sm:flex-row items-start gap-4">
             <Image
@@ -165,16 +167,18 @@ export default function RetroPortfolio() {
               className="rounded-md w-full sm:w-24 h-auto object-cover"
             />
             <div className="flex-1">
-              <h3 className="text-green-500 font-mono mb-2">Auth NuGet</h3>
+              <h3 className="text-green-500 font-mono mb-2">Shōmei Auth</h3>
               <p className="text-green-500 font-mono text-sm mb-2">
                 - C#
                 - Identity
                 - Database
                 - Code First
                 - Package
-                </p>
+                - Jwt
+                - Security
+              </p>
               <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
-                <a href="https://github.com/AbreuHD/Auth" className="flex items-center">
+                <a href="https://github.com/AbreuHD/Shomei-Auth" className="flex items-center">
                   <ExternalLink className="w-4 h-4 mr-2" />
                   View Project
                 </a>
@@ -280,7 +284,7 @@ export default function RetroPortfolio() {
       </div>
     ),
     cv: (
-      
+
       <PdfViewer fileUrl="/Jefferson Eng Resume Cut.pdf" downloadUri="/Jefferson Abreu Martinez_ENG_Resume.pdf" />
     ),
   }
@@ -343,7 +347,7 @@ export default function RetroPortfolio() {
             onClick={() => setActiveSection("cv")}
           />
         </div>
-        
+
         <div className="border border-green-500/20 p-4 mt-4">
           {content[activeSection as keyof typeof content]}
         </div>
