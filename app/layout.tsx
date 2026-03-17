@@ -16,11 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        
-      >
-        {children}
-      </body>
+      <head>
+        <script
+          defer
+          src="https://umami.kodexado.com/script.js"
+          data-website-id="7bba2745-62ef-41db-8ad3-175773a587f4"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
