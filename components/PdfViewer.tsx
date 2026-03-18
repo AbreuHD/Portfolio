@@ -37,7 +37,7 @@ const PdfViewer: React.FC<PdfViewerProps> = ({ fileUrl, downloadUri }) => {
                     size="sm"
                     className="text-green-500 border-green-500 hover:bg-green-500/20"
                 >
-                    <a href={downloadUri} className="flex items-center" download>
+                    <a href={downloadUri} className="flex items-center" download data-umami-event="cv_download">
                         <Download className="w-4 h-4 mr-2" />
                         Download
                     </a>

@@ -5,12 +5,14 @@ interface AsciiIconProps {
   label: string
   isActive?: boolean
   onClick?: () => void
+  umamiEvent?: string
 }
 
-export function AsciiIcon({ icon, label, isActive, onClick }: AsciiIconProps) {
+export function AsciiIcon({ icon, label, isActive, onClick, umamiEvent }: AsciiIconProps) {
   return (
     <button
       onClick={onClick}
+      data-umami-event={umamiEvent}
       className={`p-2 sm:p-4 transition-colors ${
         isActive ? 'bg-green-500/10' : 'hover:bg-green-500/5'
       }`}

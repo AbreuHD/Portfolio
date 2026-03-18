@@ -91,7 +91,7 @@ export default function RetroPortfolio() {
                 - Database
               </p>
               <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
-                <a href="https://github.com/AbreuHD/KuhakuAPI" className="flex items-center">
+                <a href="https://github.com/AbreuHD/KuhakuAPI" data-umami-event="project_kuhakuapi" className="flex items-center">
                   <ExternalLink className="w-4 h-4 mr-2" />
                   View Project
                 </a>
@@ -178,7 +178,7 @@ export default function RetroPortfolio() {
                 - Security
               </p>
               <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
-                <a href="https://github.com/AbreuHD/Shomei-Auth" className="flex items-center">
+                <a href="https://github.com/AbreuHD/Shomei-Auth" data-umami-event="project_shomei_auth" className="flex items-center">
                   <ExternalLink className="w-4 h-4 mr-2" />
                   View Project
                 </a>
@@ -305,13 +305,13 @@ export default function RetroPortfolio() {
           </div>
         </header>
         <div className="border border-green-500/20 p-4 mb-4 flex justify-center space-x-6">
-          <a href="https://github.com/abreuhd" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
+          <a href="https://github.com/abreuhd" target="_blank" rel="noopener noreferrer" data-umami-event="social_github" className="text-green-500 hover:text-green-400">
             <Github className="w-6 h-6" />
           </a>
-          <a href="https://linkedin.com/in/abreuhd" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400">
+          <a href="https://linkedin.com/in/abreuhd" target="_blank" rel="noopener noreferrer" data-umami-event="social_linkedin" className="text-green-500 hover:text-green-400">
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href="mailto:jefferson@abreuhd.com" className="text-green-500 hover:text-green-400">
+          <a href="mailto:jefferson@abreuhd.com" data-umami-event="social_email" className="text-green-500 hover:text-green-400">
             <Mail className="w-6 h-6" />
           </a>
         </div>
@@ -321,30 +321,35 @@ export default function RetroPortfolio() {
             label="ABOUT"
             isActive={activeSection === "about"}
             onClick={() => setActiveSection("about")}
+            umamiEvent="tab_about"
           />
           <AsciiIcon
             icon="projects"
             label="PROJECTS"
             isActive={activeSection === "projects"}
             onClick={() => setActiveSection("projects")}
+            umamiEvent="tab_projects"
           />
           <AsciiIcon
             icon="workstation"
             label="WORKSTATION"
             isActive={activeSection === "workstation"}
             onClick={() => setActiveSection("workstation")}
+            umamiEvent="tab_workstation"
           />
           <AsciiIcon
             icon="hobbies"
             label="HOBBIES"
             isActive={activeSection === "hobbies"}
             onClick={() => setActiveSection("hobbies")}
+            umamiEvent="tab_hobbies"
           />
           <AsciiIcon
             icon="resume"
             label="RESUME"
             isActive={activeSection === "cv"}
             onClick={() => setActiveSection("cv")}
+            umamiEvent="tab_resume"
           />
         </div>
 
