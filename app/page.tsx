@@ -11,8 +11,17 @@ import { useTypingEffect } from "@/hooks/useTypingEffect"
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from 'lucide-react'
-import PdfViewer from "@/components/PdfViewer"
-import { SpaceInvaders } from "@/components/SpaceInvaders"
+import dynamic from 'next/dynamic'
+
+const PdfViewer = dynamic(() => import("@/components/PdfViewer"), {
+  loading: () => <div className="p-8 text-center text-green-500 font-mono animate-pulse">Loading Document...</div>,
+  ssr: false // Keep PDF rendering client-side only
+})
+
+const SpaceInvaders = dynamic(() => import("@/components/SpaceInvaders").then(mod => mod.SpaceInvaders), {
+  loading: () => <div className="p-8 text-center text-green-500 font-mono animate-pulse">INITIALIZING MISSION...</div>,
+  ssr: false // AudioContext and Canvas require client-side
+})
 
 type Language = 'en' | 'es';
 

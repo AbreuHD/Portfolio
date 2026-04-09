@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://abreuhd.com'),
@@ -67,11 +69,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <script
-          defer
-          src="https://umami.kodexado.com/script.js"
-          data-website-id="7bba2745-62ef-41db-8ad3-175773a587f4"
-        />
-        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -99,7 +96,14 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script
+          src="https://umami.kodexado.com/script.js"
+          strategy="lazyOnload"
+          data-website-id="7bba2745-62ef-41db-8ad3-175773a587f4"
+        />
+      </body>
     </html>
   );
 }
