@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ScanLines } from "@/components/scan-lines"
 import { AsciiIcon } from "@/components/ascii-icon"
 import { TechStack } from "@/components/tech-stack"
-import { Terminal, Github, Linkedin, Mail, Gamepad2, Popcorn, Tv, BookOpen, Code } from 'lucide-react'
+import { Terminal, Github, Linkedin, Mail, Gamepad2, Popcorn, Tv, BookOpen, Code, Languages } from 'lucide-react'
 import { SiVisualstudio, SiPlesk, SiMysql, SiLinux, SiVisualstudiocode, SiAndroidstudio, SiJenkins, SiPostman, SiMicrosoftsqlserver, SiDocker, SiGithub, SiWindows } from "react-icons/si";
 
 import { useTypingEffect } from "@/hooks/useTypingEffect"
@@ -12,54 +12,148 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from 'lucide-react'
 import PdfViewer from "@/components/PdfViewer"
+
+type Language = 'en' | 'es';
+
+const translations = {
+  en: {
+    subtitles: [
+      "Backend Developer",
+      "System Architect",
+      "API Designer",
+      "Database Expert",
+      "Cloud Engineer",
+      "Anime Enthusiast"
+    ],
+    animePhrases: [
+      "The world is not as good as it should be, but there are still people who do everything they can to make it better. ~ Monkey D. Luffy",
+      "I am not a hero because I want to be, I am a hero because I am the only one who can do it. ~ Monkey D. Luffy",
+      "Life is like the sea, and hope is the wind. ~ Trafalgar D. Water Law",
+      "A man cannot change his destiny, but he can change his destiny for another. ~ Edward Elric",
+      "A lie is a lie, even if you say it with good intentions. ~ Roy Mustang",
+      "He who does not sacrifice for others cannot expect others to sacrifice for him. ~ Izumi Curtis",
+      "In this world, there is no such thing as 'I can't.' There is only 'I haven't done it yet.' ~ Asuna",
+      "People don't die when they stop breathing, they die when they stop believing. ~ Suguha Kirigaya",
+      "Even though time and distance may separate us, I will always be with you. ~ Taki Tachibana",
+      "Time doesn't heal everything. But it’s all we have. ~ Mitsuha Miyamizu",
+    ],
+    about: {
+      title: "ABOUT",
+      text: "Hello! I am a dedicated software developer with expertise in backend development using technologies like C#, .NET, and Python, alongside experience in frontend frameworks such as Angular. I specialize in web scraping techniques and implement Swagger, Identity, and SOLID principles in my projects. My skills extend to building efficient .NET libraries, developing Windows Forms apps, and integrating features like Discord Rich Presence. My passion lies in creating scalable, efficient solutions while continuously enhancing my technical expertise.",
+      anime_time: "Anime Time!"
+    },
+    projects: {
+      title: "PROJECTS",
+      view_project: "View Project"
+    },
+    workstation: {
+      title: "WORKSTATION",
+      intro: "My development environment is carefully crafted for maximum productivity:",
+      footer: "Every day learning more to keep adding!"
+    },
+    hobbies: {
+      title: "HOBBIES",
+      intro: "When not coding, I enjoy:",
+      items: {
+        open_source: "Open Source",
+        learning: "Learning",
+        side_projects: "Side Projects",
+        watch_anime: "Watch Anime",
+        video_games: "Video Games",
+        movies: "Movies and series"
+      }
+    },
+    resume: {
+      title: "RESUME",
+      cv_file: "/Jefferson Abreu Martinez - Cv (english Version).pdf",
+      cv_download: "/Jefferson Abreu Martinez - Cv (english Version).pdf"
+    }
+  },
+  es: {
+    subtitles: [
+      "Desarrollador Backend",
+      "Arquitecto de Sistemas",
+      "Diseñador de APIs",
+      "Experto en Bases de Datos",
+      "Ingeniero Cloud",
+      "Entusiasta del Anime"
+    ],
+    animePhrases: [
+      "El mundo no es tan bueno como debería ser, pero todavía hay personas que hacen todo lo posible para mejorarlo. ~ Monkey D. Luffy",
+      "No soy un héroe porque quiera serlo, soy un héroe porque soy el único que puede hacerlo. ~ Monkey D. Luffy",
+      "La vida es como el mar, y la esperanza es el viento. ~ Trafalgar D. Water Law",
+      "Un hombre no puede cambiar su destino, pero puede cambiar su destino por el de otro. ~ Edward Elric",
+      "Una mentira es una mentira, incluso si la dices con buenas intenciones. ~ Roy Mustang",
+      "El que no sacrifica por los demás no puede esperar que los demás se sacrifiquen por él. ~ Izumi Curtis",
+      "En este mundo, no existe el 'no puedo'. Solo existe el 'aún no lo he hecho'. ~ Asuna",
+      "Las personas no mueren cuando dejan de respirar, mueren cuando dejan de creer. ~ Suguha Kirigaya",
+      "Aunque el tiempo y la distancia nos separen, siempre estaré contigo. ~ Taki Tachibana",
+      "El tiempo no lo cura todo. Pero es todo lo que tenemos. ~ Mitsuha Miyamizu",
+    ],
+    about: {
+      title: "SOBRE MÍ",
+      text: "¡Hola! Soy un desarrollador de software dedicado con experiencia en el desarrollo backend usando tecnologías como C#, .NET y Python, además de experiencia en frameworks frontend como Angular. Me especializo en técnicas de web scraping e implemento Swagger, Identity y los principios SOLID en mis proyectos. Mis habilidades se extienden a la creación de bibliotecas .NET eficientes, desarrollo de aplicaciones Windows Forms e integración de características como Discord Rich Presence. Mi pasión reside en crear soluciones escalables y eficientes mientras mejoro continuamente mi experiencia técnica.",
+      anime_time: "¡Tiempo de Anime!"
+    },
+    projects: {
+      title: "PROYECTOS",
+      view_project: "Ver Proyecto"
+    },
+    workstation: {
+      title: "ESTACIÓN",
+      intro: "Mi entorno de desarrollo está cuidadosamente diseñado para la máxima productividad:",
+      footer: "¡Cada día aprendiendo más para seguir sumando!"
+    },
+    hobbies: {
+      title: "HOBBIES",
+      intro: "Cuando no estoy programando, disfruto de:",
+      items: {
+        open_source: "Código Abierto",
+        learning: "Aprendizaje",
+        side_projects: "Proyectos Paralelos",
+        watch_anime: "Ver Anime",
+        video_games: "Videojuegos",
+        movies: "Películas y series"
+      }
+    },
+    resume: {
+      title: "CV",
+      cv_file: "/Jefferson Abreu Martinez - Cv (versión Español).pdf",
+      cv_download: "/Jefferson Abreu Martinez - Cv (versión Español).pdf"
+    }
+  }
+}
+
 export default function RetroPortfolio() {
+  const [lang, setLang] = useState<Language>('en')
   const [activeSection, setActiveSection] = useState("about")
 
-  const subtitles = [
-    "Backend Developer",
-    "System Architect",
-    "API Designer",
-    "Database Expert",
-    "Cloud Engineer",
-    "Anime Enthusiast"
-  ]
+  useEffect(() => {
+    const savedLang = localStorage.getItem('portfolio-lang') as Language
+    if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
+      setLang(savedLang)
+    }
+  }, [])
 
-  const animePhrases = [
-    // One Piece
-    "The world is not as good as it should be, but there are still people who do everything they can to make it better. ~ Monkey D. Luffy",
-    "I am not a hero because I want to be, I am a hero because I am the only one who can do it. ~ Monkey D. Luffy",
-    "Life is like the sea, and hope is the wind. ~ Trafalgar D. Water Law",
+  const toggleLang = () => {
+    const newLang = lang === 'en' ? 'es' : 'en'
+    setLang(newLang)
+    localStorage.setItem('portfolio-lang', newLang)
+  }
 
-    // Fullmetal Alchemist
-    "A man cannot change his destiny, but he can change his destiny for another. ~ Edward Elric",
-    "A lie is a lie, even if you say it with good intentions. ~ Roy Mustang",
-    "He who does not sacrifice for others cannot expect others to sacrifice for him. ~ Izumi Curtis",
-
-    // Sword Art Online
-    "In this world, there is no such thing as 'I can't.' There is only 'I haven't done it yet.' ~ Asuna",
-    "People don't die when they stop breathing, they die when they stop believing. ~ Suguha Kirigaya",
-
-    // Your Name
-    "Even though time and distance may separate us, I will always be with you. ~ Taki Tachibana",
-    "Time doesn't heal everything. But it’s all we have. ~ Mitsuha Miyamizu",
-  ];
-
-  const typedText = useTypingEffect(subtitles, 100, 50, 1500)
-  const typedAnimeText = useTypingEffect(animePhrases, 75, 50, 1500)
+  const t = translations[lang]
+  const typedText = useTypingEffect(t.subtitles, 100, 50, 1500)
+  const typedAnimeText = useTypingEffect(t.animePhrases, 75, 50, 1500)
 
   const content = {
     about: (
       <div className="space-y-4">
         <p className="text-green-500 font-mono">
-          Hello! I am a dedicated software developer with expertise in backend development using technologies like
-          C#, .NET, and Python, alongside experience in frontend frameworks such as Angular. I specialize in web scraping techniques and implement Swagger,
-          Identity, and SOLID principles in my projects. My skills extend to building efficient .NET libraries, developing Windows Forms apps,
-          and integrating features like Discord Rich Presence. My passion lies in creating scalable, efficient solutions while continuously enhancing
-          my technical expertise.
+          {t.about.text}
         </p>
-        <TechStack />
+        <TechStack lang={lang} />
         <div className="border border-green-500/20 p-4 mt-4">
-          <h3 className="text-green-500 font-mono mb-2">Anime Time!</h3>
+          <h3 className="text-green-500 font-mono mb-2">{t.about.anime_time}</h3>
           <p className="text-green-500 font-mono text-sm">
             {typedAnimeText}<span className="animate-blink">_</span>
           </p>
@@ -68,7 +162,6 @@ export default function RetroPortfolio() {
     ),
     projects: (
       <div className="space-y-4">
-
         <div className="border border-green-500/20 p-4">
           <div className="flex flex-col sm:flex-row items-start gap-4">
             <Image
@@ -87,76 +180,18 @@ export default function RetroPortfolio() {
                 - Identity
                 - C#
                 - Onion Arch
-                - Movies
-                - Database
+                - {lang === 'en' ? 'Movies' : 'Películas'}
+                - {lang === 'en' ? 'Database' : 'Base de Datos'}
               </p>
               <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
                 <a href="https://github.com/AbreuHD/KuhakuAPI" data-umami-event="project_kuhakuapi" className="flex items-center">
                   <ExternalLink className="w-4 h-4 mr-2" />
-                  View Project
+                  {t.projects.view_project}
                 </a>
               </Button>
             </div>
           </div>
         </div>
-        {
-          /*
-                <div className="border border-green-500/20 p-4">
-                  <div className="flex flex-col sm:flex-row items-start gap-4">
-                    <Image
-                      src="/projects/NotYet.webp"
-                      alt="Bidehan"
-                      width={100}
-                      height={100}
-                      className="rounded-md w-full sm:w-24 h-auto object-cover"
-                    />
-                    <div className="flex-1">
-                      <h3 className="text-green-500 font-mono mb-2">Bidehan</h3>
-                      <p className="text-green-500 font-mono text-sm mb-2">
-                        - WebScraping
-                        - NuGet
-                        - C#
-                        - Video Source
-                      </p>
-                      <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
-                        <a href="https://github.com/AbreuHD/Bidehan" className="flex items-center">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          View Project
-                        </a>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-        
-                <div className="border border-green-500/20 p-4">
-                  <div className="flex flex-col sm:flex-row items-start gap-4">
-                    <Image
-                      src="/projects/NotYet.webp"
-                      alt="Bideo Rinku"
-                      width={100}
-                      height={100}
-                      className="rounded-md w-full sm:w-24 h-auto object-cover"
-                    />
-                    <div className="flex-1">
-                      <h3 className="text-green-500 font-mono mb-2">Bideo Rinku</h3>
-                      <p className="text-green-500 font-mono text-sm mb-2">
-                        - C#
-                        - Windows Form
-                        - WebScraping
-                        - VLC Media Player
-                        - Discord Rich Presence
-                        </p>
-                      <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
-                        <a href="https://github.com/AbreuHD/Bideo-Rinku" className="flex items-center">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          View Project
-                        </a>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                */
-        }
         <div className="border border-green-500/20 p-4">
           <div className="flex flex-col sm:flex-row items-start gap-4">
             <Image
@@ -171,16 +206,16 @@ export default function RetroPortfolio() {
               <p className="text-green-500 font-mono text-sm mb-2">
                 - C#
                 - Identity
-                - Database
-                - Code First
+                - {lang === 'en' ? 'Database' : 'Base de Datos'}
+                - {lang === 'en' ? 'Code First' : 'Código Primero'}
                 - Package
                 - Jwt
-                - Security
+                - {lang === 'en' ? 'Security' : 'Seguridad'}
               </p>
               <Button variant="outline" size="sm" className="text-green-500 border-green-500 hover:bg-green-500/20">
                 <a href="https://github.com/AbreuHD/Shomei-Auth" data-umami-event="project_shomei_auth" className="flex items-center">
                   <ExternalLink className="w-4 h-4 mr-2" />
-                  View Project
+                  {t.projects.view_project}
                 </a>
               </Button>
             </div>
@@ -191,7 +226,7 @@ export default function RetroPortfolio() {
     workstation: (
       <div className="space-y-4">
         <p className="text-green-500 font-mono mb-4">
-          My development environment is carefully crafted for maximum productivity:
+          {t.workstation.intro}
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
@@ -245,7 +280,7 @@ export default function RetroPortfolio() {
         </div>
         <div className="border border-green-500/20 p-4 mt-4">
           <p className="text-green-500 font-mono text-sm">
-            Every day learning more to keep adding!
+            {t.workstation.footer}
           </p>
         </div>
       </div>
@@ -253,39 +288,42 @@ export default function RetroPortfolio() {
     hobbies: (
       <div className="space-y-4">
         <p className="text-green-500 font-mono mb-4">
-          When not coding, I enjoy:
+          {t.hobbies.intro}
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
             <Github className="w-8 h-8 text-green-500 mb-2" />
-            <span className="text-green-500 font-mono text-sm">Open Source</span>
+            <span className="text-green-500 font-mono text-sm">{t.hobbies.items.open_source}</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
             <BookOpen className="w-8 h-8 text-green-500 mb-2" />
-            <span className="text-green-500 font-mono text-sm">Learning</span>
+            <span className="text-green-500 font-mono text-sm">{t.hobbies.items.learning}</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
             <Code className="w-8 h-8 text-green-500 mb-2" />
-            <span className="text-green-500 font-mono text-sm">Side Projects</span>
+            <span className="text-green-500 font-mono text-sm">{t.hobbies.items.side_projects}</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
             <Tv className="w-8 h-8 text-green-500 mb-2" />
-            <span className="text-green-500 font-mono text-sm">Watch Anime</span>
+            <span className="text-green-500 font-mono text-sm">{t.hobbies.items.watch_anime}</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
             <Gamepad2 className="w-8 h-8 text-green-500 mb-2" />
-            <span className="text-green-500 font-mono text-sm">Video Games</span>
+            <span className="text-green-500 font-mono text-sm">{t.hobbies.items.video_games}</span>
           </div>
           <div className="border border-green-500/20 p-4 flex flex-col items-center">
             <Popcorn className="w-8 h-8 text-green-500 mb-2" />
-            <span className="text-green-500 font-mono text-sm">Movies and series</span>
+            <span className="text-green-500 font-mono text-sm">{t.hobbies.items.movies}</span>
           </div>
         </div>
       </div>
     ),
     cv: (
-
-      <PdfViewer fileUrl="/Jefferson Eng Resume Cut.pdf" downloadUri="/Jefferson Abreu Martinez_ENG_Resume.pdf" />
+      <PdfViewer 
+        key={lang} // Key to force re-render when language changes
+        fileUrl={t.resume.cv_file} 
+        downloadUri={t.resume.cv_download} 
+      />
     ),
   }
 
@@ -294,16 +332,27 @@ export default function RetroPortfolio() {
       <ScanLines />
       <div className="max-w-4xl mx-auto p-4">
         <header className="border border-green-500/20 p-4 mb-4">
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <Terminal className="w-12 h-12 text-green-500" />
-            <div className="text-center sm:text-left">
-              <h1 className="text-green-500 font-mono text-xl">Jefferson@AbreuHD:~$</h1>
-              <p className="text-green-500 font-mono text-sm h-6">
-                {typedText}<span className="animate-blink">_</span>
-              </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <Terminal className="w-12 h-12 text-green-500" />
+              <div className="text-center sm:text-left">
+                <h1 className="text-green-500 font-mono text-xl">Jefferson@AbreuHD:~$</h1>
+                <p className="text-green-500 font-mono text-sm h-6">
+                  {typedText}<span className="animate-blink">_</span>
+                </p>
+              </div>
             </div>
+            
+            <button 
+              onClick={toggleLang}
+              className="flex items-center gap-2 border border-green-500/40 px-3 py-1 text-green-500 font-mono text-sm hover:bg-green-500/20 transition-colors"
+            >
+              <Languages className="w-4 h-4" />
+              {lang.toUpperCase()}
+            </button>
           </div>
         </header>
+
         <div className="border border-green-500/20 p-4 mb-4 flex justify-center space-x-6">
           <a href="https://github.com/abreuhd" target="_blank" rel="noopener noreferrer" data-umami-event="social_github" className="text-green-500 hover:text-green-400">
             <Github className="w-6 h-6" />
@@ -315,38 +364,39 @@ export default function RetroPortfolio() {
             <Mail className="w-6 h-6" />
           </a>
         </div>
+
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-green-500/20">
           <AsciiIcon
             icon="about"
-            label="ABOUT"
+            label={t.about.title}
             isActive={activeSection === "about"}
             onClick={() => setActiveSection("about")}
             umamiEvent="tab_about"
           />
           <AsciiIcon
             icon="projects"
-            label="PROJECTS"
+            label={t.projects.title}
             isActive={activeSection === "projects"}
             onClick={() => setActiveSection("projects")}
             umamiEvent="tab_projects"
           />
           <AsciiIcon
             icon="workstation"
-            label="WORKSTATION"
+            label={t.workstation.title}
             isActive={activeSection === "workstation"}
             onClick={() => setActiveSection("workstation")}
             umamiEvent="tab_workstation"
           />
           <AsciiIcon
             icon="hobbies"
-            label="HOBBIES"
+            label={t.hobbies.title}
             isActive={activeSection === "hobbies"}
             onClick={() => setActiveSection("hobbies")}
             umamiEvent="tab_hobbies"
           />
           <AsciiIcon
             icon="resume"
-            label="RESUME"
+            label={t.resume.title}
             isActive={activeSection === "cv"}
             onClick={() => setActiveSection("cv")}
             umamiEvent="tab_resume"
@@ -370,4 +420,5 @@ export default function RetroPortfolio() {
     </div>
   )
 }
+
 

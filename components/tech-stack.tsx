@@ -4,14 +4,35 @@ import { SiKotlin, SiAzurepipelines, SiIonic  } from "react-icons/si";
 import { GiSpiderWeb } from "react-icons/gi";
 
 
-export function TechStack() {
+interface TechStackProps {
+  lang: 'en' | 'es';
+}
+
+export function TechStack({ lang }: TechStackProps) {
+  const t = {
+    en: {
+      title: "Tech Stack",
+      backend: "Backend",
+      webscraping: "WebScraping",
+      database: "Database",
+      pipelines: "Pipelines",
+    },
+    es: {
+      title: "Tecnologías",
+      backend: "Backend",
+      webscraping: "Scraping Web",
+      database: "Bases de Datos",
+      pipelines: "Pipelines",
+    }
+  }[lang];
+
   return (
     <div className="border border-green-500/20 p-4 mt-4">
-      <h3 className="text-green-500 font-mono mb-4">Tech Stack</h3>
+      <h3 className="text-green-500 font-mono mb-4">{t.title}</h3>
       <div className="grid grid-cols-4 gap-4">
         <div className="flex flex-col items-center">
           <FaServer className="w-8 h-8 text-green-500" />
-          <span className="text-green-500 font-mono text-xs mt-2">Backend</span>
+          <span className="text-green-500 font-mono text-xs mt-2">{t.backend}</span>
         </div>
         <div className="flex flex-col items-center">
           <SiCsharp className="w-8 h-8 text-green-500" />
@@ -31,15 +52,15 @@ export function TechStack() {
         </div>
         <div className="flex flex-col items-center">
           <GiSpiderWeb className="w-8 h-8 text-green-500" />
-          <span className="text-green-500 font-mono text-xs mt-2">WebScraping</span>
+          <span className="text-green-500 font-mono text-xs mt-2">{t.webscraping}</span>
         </div>
         <div className="flex flex-col items-center">
           <FaDatabase className="w-8 h-8 text-green-500" />
-          <span className="text-green-500 font-mono text-xs mt-2">Database</span>
+          <span className="text-green-500 font-mono text-xs mt-2">{t.database}</span>
         </div>
         <div className="flex flex-col items-center">
           <SiAzurepipelines  className="w-8 h-8 text-green-500" />
-          <span className="text-green-500 font-mono text-xs mt-2">Pipelines</span>
+          <span className="text-green-500 font-mono text-xs mt-2">{t.pipelines}</span>
         </div>
         <div className="flex flex-col items-center">
           <SiIonic className="w-8 h-8 text-green-500" />
@@ -61,4 +82,5 @@ export function TechStack() {
     </div>
   )
 }
+
 
