@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight, Target, Play, RotateCcw } from 'lucide-react'
+import { trackEvent } from '@/lib/umami'
 
 interface SpaceInvadersProps {
   lang: 'en' | 'es'
@@ -83,6 +84,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
     audio.current.init()
     setScore(0)
     setGameState('playing')
+    trackEvent('game_start', { lang })
     playerX.current = GAME_WIDTH / 2 - 15
     bullets.current = []
     alienSpeed.current = 0.5
@@ -165,6 +167,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
               if (newScore > highScore) {
                 setHighScore(newScore)
                 localStorage.setItem('space-invaders-highscore', newScore.toString())
+                trackEvent('game_high_score', { score: newScore })
               }
               return newScore
             })
@@ -178,9 +181,11 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
       const reachedBottom = aliens.current.some(a => a.alive && a.y > GAME_HEIGHT - 60)
       if (allDead) {
         alienSpeed.current += 0.2 // Stack difficulty for next wave
+        trackEvent('game_wave_cleared', { wave_speed: alienSpeed.current.toFixed(1) })
         initAliens() // Next Wave
       } else if (reachedBottom) {
         setGameState('gameOver')
+        trackEvent('game_over', { score })
       }
 
       // Render
