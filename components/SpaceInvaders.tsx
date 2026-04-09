@@ -15,6 +15,7 @@ class RetroAudio {
 
   init() {
     if (!this.ctx) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)()
     }
   }
@@ -215,6 +216,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
 
     animationId = requestAnimationFrame(update)
     return () => cancelAnimationFrame(animationId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState, highScore, initAliens])
 
   const t = {
