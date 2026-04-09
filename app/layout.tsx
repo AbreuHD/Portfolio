@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "AbreuHD",
   description: "Jefferson Abreu | Portfolio",
   icons: {
-    icon: "./favicon.ico",
+    icon: "/favicon.svg",
   },
 };
 

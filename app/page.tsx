@@ -12,6 +12,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from 'lucide-react'
 import PdfViewer from "@/components/PdfViewer"
+import { SpaceInvaders } from "@/components/SpaceInvaders"
 
 type Language = 'en' | 'es';
 
@@ -67,6 +68,9 @@ const translations = {
       title: "RESUME",
       cv_file: "/Jefferson Abreu Martinez - Cv (english Version).pdf",
       cv_download: "/Jefferson Abreu Martinez - Cv (english Version).pdf"
+    },
+    game: {
+      title: "GAME"
     }
   },
   es: {
@@ -120,6 +124,9 @@ const translations = {
       title: "CV",
       cv_file: "/Jefferson Abreu Martinez - Cv (versión Español).pdf",
       cv_download: "/Jefferson Abreu Martinez - Cv (versión Español).pdf"
+    },
+    game: {
+      title: "JUEGO"
     }
   }
 }
@@ -325,6 +332,11 @@ export default function RetroPortfolio() {
         downloadUri={t.resume.cv_download} 
       />
     ),
+    game: (
+      <div className="space-y-4">
+        <SpaceInvaders lang={lang} />
+      </div>
+    ),
   }
 
   return (
@@ -365,7 +377,7 @@ export default function RetroPortfolio() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-green-500/20">
+        <div className="grid grid-cols-2 sm:grid-cols-6 gap-px bg-green-500/20">
           <AsciiIcon
             icon="about"
             label={t.about.title}
@@ -400,6 +412,13 @@ export default function RetroPortfolio() {
             isActive={activeSection === "cv"}
             onClick={() => setActiveSection("cv")}
             umamiEvent="tab_resume"
+          />
+          <AsciiIcon
+            icon="game"
+            label={t.game.title}
+            isActive={activeSection === "game"}
+            onClick={() => setActiveSection("game")}
+            umamiEvent="tab_game"
           />
         </div>
 

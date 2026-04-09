@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Spaced out >_< Face - Version 2 -->
+  <!-- Left Eye '>' - Slightly narrowed and offset -->
+  <path d="M4 20L16 32L4 44" stroke="#22C55E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Mouth '_' - Lower centered -->
+  <path d="M24 52H40" stroke="#22C55E" stroke-width="8" stroke-linecap="round"/>
+  <!-- Right Eye '<' - Slightly narrowed and offset -->
+  <path d="M60 20L48 32L60 44" stroke="#22C55E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
