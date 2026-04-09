@@ -47,7 +47,8 @@ const GAME_HEIGHT = 500
 
 export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [gameState, setGameState] = useState<'idle' | 'playing' | 'gameOver'>('idle')
+  const [gameState, setGameState] = useState<'idle' | 'playing' | 'gameOver' | 'levelTransition'>('idle')
+  const [level, setLevel] = useState(1)
   const [score, setScore] = useState(0)
   const [highScore, setHighScore] = useState(0)
   const audio = useRef<RetroAudio>(new RetroAudio())
@@ -84,6 +85,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
   const startGame = () => {
     audio.current.init()
     setScore(0)
+    setLevel(1)
     setGameState('playing')
     trackEvent('game_start', { lang })
     playerX.current = GAME_WIDTH / 2 - 15
@@ -125,6 +127,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
     if (gameState !== 'playing') return
 
     let animationId: number
+    lastTime.current = performance.now()
 
     const update = (time: number) => {
       const dt = time - lastTime.current
@@ -163,6 +166,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
           if (a.alive && b.x > a.x && b.x < a.x + 25 && b.y > a.y && b.y < a.y + 20) {
             a.alive = false
             bullets.current.splice(bi, 1)
+            alienSpeed.current += 0.015 // Speed up per kill
             setScore(s => {
               const newScore = s + 10
               if (newScore > highScore) {
@@ -181,9 +185,15 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
       const allDead = aliens.current.every(a => !a.alive)
       const reachedBottom = aliens.current.some(a => a.alive && a.y > GAME_HEIGHT - 60)
       if (allDead) {
-        alienSpeed.current += 0.2 // Stack difficulty for next wave
+        setGameState('levelTransition')
         trackEvent('game_wave_cleared', { wave_speed: alienSpeed.current.toFixed(1) })
-        initAliens() // Next Wave
+        bullets.current = []
+        setTimeout(() => {
+          setLevel(l => l + 1)
+          initAliens() // Next Wave
+          setGameState('playing')
+        }, 2000)
+        return // Stop loop; will resume from useEffect when gameState becomes 'playing'
       } else if (reachedBottom) {
         setGameState('gameOver')
         trackEvent('game_over', { score })
@@ -223,6 +233,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
     en: {
       score: "Score",
       highScore: "High",
+      level: "LEVEL",
       start: "START MISSION",
       restart: "RETRY",
       gameOver: "GAME OVER",
@@ -231,6 +242,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
     es: {
       score: "Puntos",
       highScore: "Max",
+      level: "NIVEL",
       start: "INICIAR MISIÓN",
       restart: "REINTENTAR",
       gameOver: "FIN DEL JUEGO",
@@ -242,6 +254,7 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
     <div className="flex flex-col items-center space-y-4 font-mono select-none">
       <div className="flex justify-between w-full max-w-[400px] text-green-500 text-sm border-b border-green-500/20 pb-2">
         <span>{t.score}: {score.toString().padStart(4, '0')}</span>
+        <span>{t.level} {level}</span>
         <span>{t.highScore}: {highScore.toString().padStart(4, '0')}</span>
       </div>
 
@@ -255,20 +268,28 @@ export const SpaceInvaders: React.FC<SpaceInvadersProps> = ({ lang }) => {
 
         {gameState !== 'playing' && (
           <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center p-6 text-center">
-            {gameState === 'gameOver' && (
-              <h2 className="text-red-500 text-4xl mb-6 animate-pulse">{t.gameOver}</h2>
+            {gameState === 'levelTransition' ? (
+              <h2 className="text-green-500 text-4xl mb-6 animate-pulse">
+                {t.level} {level + 1}
+              </h2>
+            ) : (
+              <>
+                {gameState === 'gameOver' && (
+                  <h2 className="text-red-500 text-4xl mb-6 animate-pulse">{t.gameOver}</h2>
+                )}
+                <Button 
+                  onClick={startGame}
+                  variant="outline"
+                  className="border-green-500 text-green-500 hover:bg-green-500 hover:text-black text-lg h-16 px-8 transition-all active:scale-95"
+                >
+                  {gameState === 'idle' ? <Play className="mr-2" /> : <RotateCcw className="mr-2" />}
+                  {gameState === 'idle' ? t.start : t.restart}
+                </Button>
+                <p className="mt-8 text-green-500/60 text-xs tracking-widest hidden sm:block">
+                  {t.instructions}
+                </p>
+              </>
             )}
-            <Button 
-              onClick={startGame}
-              variant="outline"
-              className="border-green-500 text-green-500 hover:bg-green-500 hover:text-black text-lg h-16 px-8 transition-all active:scale-95"
-            >
-              {gameState === 'idle' ? <Play className="mr-2" /> : <RotateCcw className="mr-2" />}
-              {gameState === 'idle' ? t.start : t.restart}
-            </Button>
-            <p className="mt-8 text-green-500/60 text-xs tracking-widest hidden sm:block">
-              {t.instructions}
-            </p>
           </div>
         )}
       </div>
