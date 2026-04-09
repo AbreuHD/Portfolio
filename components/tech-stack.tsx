@@ -28,7 +28,7 @@ export function TechStack({ lang }: TechStackProps) {
 
   return (
     <div className="border border-green-500/20 p-4 mt-4">
-      <h3 className="text-green-500 font-mono mb-4">{t.title}</h3>
+      <h2 className="text-green-500 font-mono mb-4">{t.title}</h2>
       <div className="grid grid-cols-4 gap-4">
         <div className="flex flex-col items-center">
           <FaServer className="w-8 h-8 text-green-500" />

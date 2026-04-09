@@ -169,7 +169,7 @@ export default function RetroPortfolio() {
         </p>
         <TechStack lang={lang} />
         <div className="border border-green-500/20 p-4 mt-4">
-          <h3 className="text-green-500 font-mono mb-2">{t.about.anime_time}</h3>
+          <h2 className="text-green-500 font-mono mb-2">{t.about.anime_time}</h2>
           <p className="text-green-500 font-mono text-sm">
             {typedAnimeText}<span className="animate-blink">_</span>
           </p>
@@ -188,7 +188,7 @@ export default function RetroPortfolio() {
               className="rounded-md w-full sm:w-24 h-auto object-cover"
             />
             <div className="flex-1">
-              <h3 className="text-green-500 font-mono mb-2">KuhakuAPI</h3>
+              <h2 className="text-green-500 font-mono mb-2">KuhakuAPI</h2>
               <p className="text-green-500 font-mono text-sm mb-2">
                 - WebScraping
                 - API
@@ -218,7 +218,7 @@ export default function RetroPortfolio() {
               className="rounded-md w-full sm:w-24 h-auto object-cover"
             />
             <div className="flex-1">
-              <h3 className="text-green-500 font-mono mb-2">Shōmei Auth</h3>
+              <h2 className="text-green-500 font-mono mb-2">Shōmei Auth</h2>
               <p className="text-green-500 font-mono text-sm mb-2">
                 - C#
                 - Identity
@@ -351,7 +351,7 @@ export default function RetroPortfolio() {
   return (
     <div className="min-h-screen bg-black">
       <ScanLines />
-      <div className="max-w-4xl mx-auto p-4">
+      <main className="max-w-4xl mx-auto p-4">
         <header className="border border-green-500/20 p-4 mb-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -375,13 +375,13 @@ export default function RetroPortfolio() {
         </header>
 
         <div className="border border-green-500/20 p-4 mb-4 flex justify-center space-x-6">
-          <a href="https://github.com/abreuhd" target="_blank" rel="noopener noreferrer" data-umami-event="social_github" className="text-green-500 hover:text-green-400">
+          <a href="https://github.com/abreuhd" target="_blank" rel="noopener noreferrer" data-umami-event="social_github" aria-label="GitHub Profile" className="text-green-500 hover:text-green-400">
             <Github className="w-6 h-6" />
           </a>
-          <a href="https://linkedin.com/in/abreuhd" target="_blank" rel="noopener noreferrer" data-umami-event="social_linkedin" className="text-green-500 hover:text-green-400">
+          <a href="https://linkedin.com/in/abreuhd" target="_blank" rel="noopener noreferrer" data-umami-event="social_linkedin" aria-label="LinkedIn Profile" className="text-green-500 hover:text-green-400">
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href="mailto:jefferson@abreuhd.com" data-umami-event="social_email" className="text-green-500 hover:text-green-400">
+          <a href="mailto:jefferson@abreuhd.com" data-umami-event="social_email" aria-label="Email Contact" className="text-green-500 hover:text-green-400">
             <Mail className="w-6 h-6" />
           </a>
         </div>
@@ -444,7 +444,7 @@ export default function RetroPortfolio() {
             animation: blink 1s infinite;
           }
         `}</style>
-      </div>
+      </main>
     </div>
   )
 }
